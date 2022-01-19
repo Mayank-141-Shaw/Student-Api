@@ -53,7 +53,7 @@ public class UserController {
         final String token = jwtTokenUtil.generateToken(authentication);
         
         // add new user to the db
-        currentUserService.saveNewLoginUser(loginUser.getUsername(), loginUser.getPassword());
+        currentUserService.saveNewCurrentUser(loginUser.getUsername(), loginUser.getPassword());
         
         return ResponseEntity.ok(new AuthToken(token));
     }

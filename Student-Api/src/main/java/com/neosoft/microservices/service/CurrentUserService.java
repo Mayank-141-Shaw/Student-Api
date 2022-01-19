@@ -5,7 +5,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.neosoft.microservices.model.LoginUser;
+import com.neosoft.microservices.model.CurrentUser;
 import com.neosoft.microservices.model.Role;
 import com.neosoft.microservices.model.User;
 import com.neosoft.microservices.repo.CurrentUserRepository;
@@ -20,13 +20,13 @@ public class CurrentUserService {
 	private UserServiceImpl userService;
 	
 	
-	public LoginUser setRoleForCurrentUser(LoginUser loginUser) {
+	public CurrentUser setRoleForCurrentUser(CurrentUser curUser) {
 		// find the role of the user
 		// username from curent user match with user in userRepo
 		// return its roles
 		
-		loginUser.setRoles(getRolesByUsername(loginUser.getUsername()));
-		return loginUser;
+		curUser.setRoles(getRolesByUsername(curUser.getUsername()));
+		return curUser;
 	}
 	
 	public Set<Role> getRolesByUsername(String username){
@@ -34,13 +34,13 @@ public class CurrentUserService {
 		return existingUser.getRoles();
 	}
 	
-	public void saveNewLoginUser(String username, String password) {
+	public void saveNewCurrentUser(String username, String password) {
 		
 		// removing any instance of previous data
         currentRepo.deleteAll();
         
         // we have username and password already
-        LoginUser newUser = new LoginUser();
+        CurrentUser newUser = new CurrentUser();
         
         newUser.setUsername(username);
         newUser.setPassword(password);
